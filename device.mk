@@ -17,7 +17,7 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk)
 
 # Inherit the proprietary files
-$(call inherit-product, vendor/xiaomi/spes/spes-vendor.mk)
+$(call inherit-product, vendor/xiaomi/fog/fog-vendor.mk)
 
 ifeq ($(wildcard hardware/xiaomi/Android.bp),)
 $(error Error: cannot found hardware/xiaomi repository, please clone it and try to build again!)
@@ -221,11 +221,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     disable_configstore
 
-# Dolby
+# Exclude AudioFX
 TARGET_EXCLUDES_AUDIOFX := true
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/dolby/dax-default.xml:$(TARGET_COPY_OUT_VENDOR)/etc/dolby/dax-default.xml
 
 # DRM
 PRODUCT_PACKAGES += \
@@ -255,7 +252,7 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.1-service.spes
+    android.hardware.biometrics.fingerprint@2.1-service.fog
 
 # FM
 PRODUCT_PACKAGES += \
@@ -317,7 +314,7 @@ PRODUCT_PACKAGES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    android.hardware.lights-service.spes
+    android.hardware.lights-service.fog
 
 # Media
 PRODUCT_PACKAGES += \
@@ -395,7 +392,7 @@ DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay
 
 PRODUCT_PACKAGES += \
-    SettingsOverlaySpes \
+    SettingsOverlayFog \
     NotchBarKiller
 
 PRODUCT_ENFORCE_RRO_TARGETS := *
@@ -461,7 +458,7 @@ PRODUCT_PACKAGES += \
     init.qcom.rc \
     init.qcom.usb.rc \
     init.recovery.qcom.rc \
-    init.spes.perf.rc \
+    init.fog.perf.rc \
     init.stnfc.rc \
     init.target.rc \
     ueventd.qcom.rc
@@ -504,7 +501,7 @@ PRODUCT_PACKAGES += \
 
 # USB
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.2-service-spes
+    android.hardware.usb@1.2-service-fog
 
 # Vendor service manager
 PRODUCT_PACKAGES += \

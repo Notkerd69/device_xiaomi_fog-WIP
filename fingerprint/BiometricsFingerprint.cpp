@@ -14,8 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#define LOG_TAG "android.hardware.biometrics.fingerprint@2.1-service.spes"
-#define LOG_VERBOSE "android.hardware.biometrics.fingerprint@2.1-service.spes"
+#define LOG_TAG "android.hardware.biometrics.fingerprint@2.1-service.fog"
+#define LOG_VERBOSE "android.hardware.biometrics.fingerprint@2.1-service.fog"
 
 #include <hardware/hw_auth_token.h>
 
@@ -255,7 +255,7 @@ fingerprint_device_t* getDeviceForVendor(const char *class_name) {
 
 fingerprint_device_t* getFingerprintDevice() {
     fingerprint_device_t *fp_device;
-    std::string vendor_modules[] = { "fpc", "goodix" };
+    std::string vendor_modules[] = { "fpc", "goodix", "silead" };
 
     for (const auto& vendor : vendor_modules) {
         if ((fp_device = getDeviceForVendor(vendor.c_str())) == nullptr) {

@@ -1,8 +1,8 @@
 cc_binary {
-    name: "android.hardware.lights-service.spes",
+    name: "android.hardware.lights-service.fog",
     relative_install_path: "hw",
-    init_rc: ["lights-spes.rc"],
-    vintf_fragments: ["lights-spes.xml"],
+    init_rc: ["lights-fog.rc"],
+    vintf_fragments: ["lights-fog.xml"],
     vendor: true,
     shared_libs: [
         "libbase",

@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-DEVICE_PATH := device/xiaomi/spes
+DEVICE_PATH := device/xiaomi/fog
 
 # A/B
 AB_OTA_UPDATER := true
@@ -67,10 +67,6 @@ BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 1
 
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
 
-# Bluetooth
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth/include
-BOARD_HAVE_BLUETOOTH := true
-
 # Board
 TARGET_BOARD_INFO_FILE := $(DEVICE_PATH)/board-info.txt
 
@@ -87,6 +83,8 @@ RELAX_USES_LIBRARY_CHECK=true
 TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/configs/config.fs
 
 # Display
+TARGET_DISABLE_POSTRENDER_CLEANUP := true
+TARGET_GRALLOC_HANDLE_HAS_RESERVED_SIZE := true
 TARGET_USES_COLOR_METADATA := true
 TARGET_USES_DISPLAY_RENDER_INTENTS := true
 TARGET_USES_DRM_PP := true
@@ -105,34 +103,37 @@ BOARD_HAVE_QCOM_FM := true
 BOARD_USES_METADATA_PARTITION := true
 
 # HALs
-QCOM_SOONG_NAMESPACE := $(DEVICE_PATH)/hals
+USE_DEVICE_SPECIFIC_AUDIO := true
 DEVICE_SPECIFIC_AUDIO_PATH := $(DEVICE_PATH)/hals/audio
+USE_DEVICE_SPECIFIC_DISPLAY := true
 DEVICE_SPECIFIC_DISPLAY_PATH := $(DEVICE_PATH)/hals/display
+USE_DEVICE_SPECIFIC_MEDIA := true
 DEVICE_SPECIFIC_MEDIA_PATH := $(DEVICE_PATH)/hals/media
+QCOM_SOONG_NAMESPACE := $(DEVICE_PATH)/hals
 TARGET_USES_CUSTOM_DISPLAY_INTERFACE := true
 
 # OTA assert
-TARGET_OTA_ASSERT_DEVICE := spes,spesn
+TARGET_OTA_ASSERT_DEVICE := fog,rain,wind
 
 # HIDL
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
     $(DEVICE_PATH)/configs/hidl/framework_compatibility_matrix.xml
 DEVICE_MATRIX_FILE += $(DEVICE_PATH)/configs/hidl/compatibility_matrix.xml
 DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/configs/hidl/manifest.xml
-ifeq ($(PRODUCT_NAME), lineage_spes)
+ifeq ($(PRODUCT_NAME), lineage_fog)
 DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/configs/hidl/manifest-lineage.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
     $(DEVICE_PATH)/configs/hidl/framework_compatibility_matrix-lineage.xml
 endif
-ODM_MANIFEST_SKUS += k7tn
-ODM_MANIFEST_K7TN_FILES := $(DEVICE_PATH)/configs/hidl/manifest_k7tn.xml
+ODM_MANIFEST_SKUS += c3qn
+ODM_MANIFEST_C3QN_FILES := $(DEVICE_PATH)/configs/vintf/manifest_c3qn.xml
 
 # HWUI
 HWUI_COMPILE_FOR_PERF := true
 
 # Init
-TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):init_xiaomi_spes
-TARGET_RECOVERY_DEVICE_MODULES := init_xiaomi_spes
+TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):libinit_fog
+TARGET_RECOVERY_DEVICE_MODULES := libinit_fog
 
 # Kernel
 BOARD_KERNEL_BASE        := 0x00000000
@@ -170,8 +171,8 @@ TARGET_FORCE_PREBUILT_KERNEL := true
 TARGET_KERNEL_ARCH := arm64
 BOARD_RAMDISK_USE_LZ4 := true
 TARGET_KERNEL_CONFIG := vendor/bengal_defconfig
-TARGET_KERNEL_HEADERS := kernel/xiaomi/spes
-TARGET_KERNEL_SOURCE := kernel/xiaomi/spes
+TARGET_KERNEL_HEADERS := kernel/xiaomi/fog
+TARGET_KERNEL_SOURCE := kernel/xiaomi/fog
 
 # LMKD
 TARGET_LMKD_STATS_LOG := true
@@ -247,10 +248,10 @@ TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 
 # Screen density
-TARGET_SCREEN_DENSITY := 440
+TARGET_SCREEN_DENSITY := 360
 
 # Security patch level
-VENDOR_SECURITY_PATCH := 2022-10-05
+VENDOR_SECURITY_PATCH := 2023-03-01
 
 # Sensor multi HAL
 USE_SENSOR_MULTI_HAL := true
@@ -260,7 +261,7 @@ BOARD_VNDK_VERSION := current
 NEED_AIDL_NDK_PLATFORM_BACKEND := true
 
 # Sepolicy
-include device/xiaomi/spes/sepolicy/vndr/SEPolicy.mk
+include device/xiaomi/fog/sepolicy/vndr/SEPolicy.mk
 
 SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
 ifdef CR_VERSION
@@ -286,4 +287,4 @@ WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # Inherit from the proprietary version
-include vendor/xiaomi/spes/BoardConfigVendor.mk
+include vendor/xiaomi/fog/BoardConfigVendor.mk

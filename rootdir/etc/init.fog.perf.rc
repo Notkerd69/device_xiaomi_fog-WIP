@@ -1,0 +1,60 @@
+# Copyright (C) 2022 Paranoid Android
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+on property:vendor.post_boot.parsed=1
+    # Setup runtime cpusets
+    write /dev/cpuset/top-app/cpus 0-7
+    write /dev/cpuset/foreground/cpus 0-3,6-7
+    write /dev/cpuset/background/cpus 0-1
+    write /dev/cpuset/system-background/cpus 0-3
+    write /dev/cpuset/restricted/cpus 0-3
+
+    # Configure CPU frequencies
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 691200
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/hispeed_freq 1516800
+    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 806400
+    write /sys/devices/system/cpu/cpu4/cpufreq/schedutil/hispeed_freq 1344000
+
+    # Configure governor parameters
+    # Little cluster
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/hispeed_load 90
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/pl 1
+
+    # Big cluster
+    write /sys/devices/system/cpu/cpu4/cpufreq/schedutil/hispeed_load 9
+    write /sys/devices/system/cpu/cpu4/cpufreq/schedutil/pl 1
+
+    # Configure CPU input boost
+    write /sys/module/cpu_boost/parameters/input_boost_freq "0:1344000 4:1344000"
+    write /sys/module/cpu_boost/parameters/input_boost_ms 100
+
+    # Configure scheduler
+    write /proc/sys/kernel/sched_child_runs_first 1
+    write /proc/sys/kernel/sched_tunable_scaling 1
+    write /proc/sys/kernel/sched_downmigrate 85
+    write /proc/sys/kernel/sched_upmigrate 95
+
+    # Setup default schedtune values for foreground/top-app
+    write /dev/stune/schedtune.boost 0
+    write /dev/stune/schedtune.prefer_idle 0
+    write /dev/stune/foreground/schedtune.prefer_idle 1
+    write /dev/stune/top-app/schedtune.prefer_idle 1
+    write /dev/stune/top-app/schedtune.boost 1
+    
+    # Configure uclamp
+    write /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive 1
+
+on property:persist.sys.device_provisioned=1
+    setprop dalvik.vm.dex2oat-cpu-set 0,1,2,3,4,5,7
+    setprop dalvik.vm.dex2oat-threads 6 

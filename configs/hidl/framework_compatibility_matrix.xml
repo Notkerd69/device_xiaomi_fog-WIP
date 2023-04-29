@@ -1,21 +1,5 @@
 <compatibility-matrix version="2.0" type="framework">
     <hal format="hidl" optional="true">
-        <name>android.hardware.audio</name>
-        <version>6.0</version>
-        <interface>
-            <name>IDevicesFactory</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl" optional="true">
-        <name>android.hardware.audio.effect</name>
-        <version>6.0</version>
-        <interface>
-            <name>IEffectsFactory</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl" optional="true">
         <name>android.hardware.bluetooth</name>
         <version>1.0</version>
         <interface>
@@ -23,17 +7,25 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl" optional="true">
-        <name>android.hardware.soundtrigger</name>
-        <version>2.0-3</version>
+    <hal format="aidl" optional="true">
+        <name>android.hardware.bluetooth.audio</name>
+        <version>2</version>
         <interface>
-            <name>ISoundTriggerHw</name>
+            <name>IBluetoothAudioProviderFactory</name>
             <instance>default</instance>
         </interface>
     </hal>
     <hal format="hidl" optional="true">
+        <name>android.hardware.boot</name>
+        <version>1.2</version>
+        <interface>
+            <name>IBootControl</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl" optional="true">
         <name>android.hardware.drm</name>
-        <version>1.4</version>
+        <version>1</version>
         <interface>
             <name>ICryptoFactory</name>
             <instance>clearkey</instance>
@@ -54,11 +46,12 @@
         </interface>
     </hal>
     <hal format="hidl" optional="true">
-        <name>android.hardware.ir</name>
+        <name>android.hardware.media.c2</name>
         <version>1.0</version>
         <interface>
-            <name>IConsumerIr</name>
+            <name>IComponentStore</name>
             <instance>default</instance>
+            <instance>software</instance>
         </interface>
     </hal>
     <hal format="hidl" optional="true">
@@ -85,31 +78,39 @@
     </hal>
     <hal format="hidl" optional="true">
         <name>android.hardware.radio.config</name>
-        <version>1.0-2</version>
+        <version>1.0-1</version>
         <interface>
             <name>IRadioConfig</name>
             <instance>default</instance>
         </interface>
     </hal>
     <hal format="hidl" optional="true">
+        <name>android.hardware.usb</name>
+        <version>1.2</version>
+        <interface>
+            <name>IUsb</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
         <name>android.hardware.wifi</name>
-        <version>1.5</version>
+        <version>1.5-6</version>
         <interface>
             <name>IWifi</name>
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl" optional="true">
+    <hal format="aidl" optional="true">
         <name>android.hardware.wifi.supplicant</name>
-        <version>1.0-4</version>
+        <version>1</version>
         <interface>
             <name>ISupplicant</name>
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl" optional="true">
+    <hal format="aidl" optional="true">
         <name>android.hardware.wifi.hostapd</name>
-        <version>1.3</version>
+        <version>1</version>
         <interface>
             <name>IHostapd</name>
             <instance>default</instance>
@@ -212,14 +213,6 @@
         </interface>
     </hal>
     <hal format="hidl" optional="true">
-        <name>vendor.google.google_battery</name>
-        <version>1.1</version>
-        <interface>
-            <name>IGoogleBattery</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl" optional="true">
         <name>vendor.nxp.nxpnfclegacy</name>
         <version>1.0</version>
         <interface>
@@ -228,10 +221,67 @@
         </interface>
     </hal>
     <hal format="hidl" optional="true">
+        <name>vendor.nxp.eventprocessor</name>
+        <version>1.0</version>
+        <interface>
+            <name>INxpEseEvtProcessor</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
+        <name>vendor.nxp.nxpese</name>
+        <version>1.0</version>
+        <interface>
+            <name>INxpEse</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
+        <name>vendor.nxp.nxpnfc</name>
+        <version>2.0</version>
+        <interface>
+            <name>INxpNfc</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
+        <name>vendor.nxp.nxpwiredse</name>
+        <version>1.0</version>
+        <interface>
+            <name>INxpWiredSe</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
+        <name>vendor.qti.automotive.qcarcam</name>
+        <version>1.0</version>
+        <interface>
+            <name>IQcarCamera</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
+        <name>vendor.qti.data.factory</name>
+        <version>1.0</version>
+        <version>2.0-3</version>
+        <interface>
+            <name>IFactory</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
         <name>vendor.qti.diaghal</name>
         <version>1.0</version>
         <interface>
             <name>Idiag</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
+        <name>vendor.qti.esepowermanager</name>
+        <version>1.0-1</version>
+        <interface>
+            <name>IEsePowerManager</name>
             <instance>default</instance>
         </interface>
     </hal>
@@ -288,14 +338,6 @@
         </interface>
     </hal>
     <hal format="hidl" optional="true">
-        <name>vendor.qti.hardware.cacert</name>
-        <version>1.0</version>
-        <interface>
-            <name>IService</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl" optional="true">
         <name>vendor.qti.hardware.camera.postproc</name>
         <version>1.0</version>
         <interface>
@@ -347,7 +389,6 @@
     </hal>
     <hal format="hidl" optional="true">
         <name>vendor.qti.hardware.display.allocator</name>
-        <version>1.0</version>
         <version>3.0</version>
         <version>4.0</version>
         <interface>
@@ -357,7 +398,6 @@
     </hal>
     <hal format="hidl" optional="true">
         <name>vendor.qti.hardware.display.composer</name>
-        <version>2.0-1</version>
         <version>3.0</version>
         <interface>
             <name>IQtiComposer</name>
@@ -366,7 +406,6 @@
     </hal>
     <hal format="hidl" optional="true">
         <name>vendor.qti.hardware.display.mapper</name>
-        <version>2.0</version>
         <version>3.0</version>
         <version>4.0</version>
         <interface>
@@ -380,14 +419,6 @@
         <interface>
             <name>IDspService</name>
             <instance>dspservice</instance>
-        </interface>
-    </hal>
-    <hal format="hidl" optional="true">
-        <name>vendor.qti.hardware.factory</name>
-        <version>1.0-1</version>
-        <interface>
-            <name>IFactory</name>
-            <instance>default</instance>
         </interface>
     </hal>
     <hal format="hidl" optional="true">
@@ -407,11 +438,40 @@
         </interface>
     </hal>
     <hal format="hidl" optional="true">
+        <name>vendor.qti.hardware.iop</name>
+        <version>1.0</version>
+        <version>2.0</version>
+        <interface>
+            <name>IIop</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IFactory</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
         <name>vendor.qti.hardware.mwqemadapter</name>
         <version>1.0</version>
         <interface>
             <name>IMwqemAdapter</name>
             <instance>MwqemAdapter</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
+        <name>vendor.qti.hardware.pal</name>
+        <version>1.0</version>
+        <interface>
+            <name>IPAL</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
+        <name>vendor.qti.hardware.perf</name>
+        <version>2.0-3</version>
+        <interface>
+            <name>IPerf</name>
+            <instance>default</instance>
         </interface>
     </hal>
     <hal format="hidl" optional="true">
@@ -428,6 +488,22 @@
         <interface>
             <name>IQccvndhal</name>
             <instance>qccvndhal</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
+        <name>vendor.qti.hardware.qconfig</name>
+        <version>1.0</version>
+        <interface>
+            <name>IQConfig</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
+        <name>vendor.qti.hardware.qdutils_disp</name>
+        <version>1.0</version>
+        <interface>
+            <name>IQdutilsDisp</name>
+            <instance>default</instance>
         </interface>
     </hal>
     <hal format="hidl" optional="true">
@@ -584,6 +660,20 @@
         </interface>
     </hal>
     <hal format="hidl" optional="true">
+        <name>vendor.qti.hardware.trustedui</name>
+        <version>1.0-2</version>
+        <interface>
+            <name>ITrustedInput</name>
+            <instance>default</instance>
+            <instance>qtee-vm</instance>
+        </interface>
+        <interface>
+            <name>ITrustedUI</name>
+            <instance>default</instance>
+            <instance>qtee-vm</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
         <name>vendor.qti.hardware.tui_comm</name>
         <version>1.0</version>
         <interface>
@@ -685,6 +775,14 @@
         </interface>
     </hal>
     <hal format="hidl" optional="true">
+        <name>vendor.silead.hardware.fingerprintext</name>
+        <version>1.0</version>
+        <interface>
+            <name>ISileadFingerprint</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
         <name>vendor.xiaomi.hardware.mtdservice</name>
         <version>1.0-3</version>
         <interface>
@@ -717,46 +815,6 @@
         </interface>
         <interface>
             <name>IGoodixFingerprintDaemonExt</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl" optional="true">
-        <name>vendor.xiaomi.hardware.displayfeature</name>
-        <version>1.0</version>
-        <interface>
-            <name>IDisplayFeature</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl" optional="true">
-        <name>android.hardware.usb</name>
-        <version>1.0-2</version>
-        <interface>
-            <name>IUsb</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl" optional="true">
-        <name>android.hardware.usb.gadget</name>
-        <version>1.0</version>
-        <interface>
-            <name>IUsbGadget</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl" optional="true">
-        <name>vendor.dolby.hardware.dms</name>
-        <version>1.0</version>
-        <interface>
-            <name>IDms</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl" optional="true">
-        <name>vendor.xiaomi.hardware.micharge</name>
-        <version>1.0</version>
-        <interface>
-            <name>IMiCharge</name>
             <instance>default</instance>
         </interface>
     </hal>
